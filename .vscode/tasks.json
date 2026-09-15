@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "detail": "编译当前打开的文件（并链接 src/ 下的公共模块），输出到 bin/<文件名>.exe",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-Wall",
+                "-std=gnu17",
+                "-g",
+                "-Iinclude",
+                "${relativeFile}",
+                // "src/factorial.c",
+                // "src/put_array.c",
+                "-o",
+                "bin/${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "run",
+            "detail": "先编译当前文件，再运行它",
+            "type": "shell",
+            "command": ".\\bin\\${fileBasenameNoExtension}.exe",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "dependsOn": "build",
+            "problemMatcher": []
+        }
+    ]
+}
